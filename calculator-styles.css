@@ -1,0 +1,123 @@
+* {
+  font-family: sans-serif;
+}
+.calculator {
+  border-color: transparent;
+  border-style: solid;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: center;
+  padding: 10px;
+}
+.buttons {
+  align-self: center;
+  border-color: transparent;
+  border-style: solid;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  height: 250px;
+  justify-content: center;
+  margin: 5px;
+  padding: 5px;
+  width: 580px;
+}
+.numbers {
+  border-color: transparent;
+  border-style: solid;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  height: 80%;
+  justify-content: space-evenly;
+  margin: 1px;
+  padding: 1px;
+  width:50%;
+}
+.actions {
+  border-color:transparent;
+  border-style: solid;
+  box-sizing: border-box;
+  display:flex;
+  height: 21%;
+  justify-content: space-around;
+  margin: 1px 1px 0px 1px;
+  padding: 1px;
+  width: 64%;
+}
+.operators {
+  border-color:transparent;
+  border-style: solid;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  height: 80%;
+  justify-content: space-evenly;
+  margin: 1px;
+  padding: 1px;
+  width: 15%;
+}
+.numbers button {
+  font-size: large;
+  height: 20%;
+  margin: 2px;
+  padding: 1px;
+  width: 30%;
+}
+#number-0 {
+  width: 60%;
+  margin-right: 0px;
+}
+.actions button {
+  font-size: large;
+  height: 90%;
+  margin: 2px;
+  padding: 1px;
+  width: 33%;
+}
+.operators button {
+  font-size: large;
+  height: 20%;
+  margin: 2px;
+  padding: 1px;
+  width: 90%;
+}
+.display {
+  align-self: center;
+  border-color: silver;
+  border-style:inset;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 120px;
+  padding: 5px;
+  text-align: end;
+  width: 26%;
+  font-size: 1.2rem;
+  border-width:thin;
+}
+#result {
+  background-color: #85C1E9;
+  border-width: thin;
+  color: white;
+}
+#erase {
+  background-color: #85C1E9;
+  border-width: thin;
+  color: white;
+}
+#clear {
+  background-color: #85C1E9;
+  border-width: thin;
+  color: white;
+}
+.display h2 {
+  margin: 0px 5px;
+  color:black
+}
+.display p {
+  margin: 20px 5px;
+  color: gray;
+}
