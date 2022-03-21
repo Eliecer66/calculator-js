@@ -1,8 +1,9 @@
 * {
   font-family: sans-serif;
+  box-sizing: border-box;
 }
 .calculator {
-  border: 2px solid;
+  border: 2px solid #000000;
   border-radius: 10px;
   background-color: #000000 ;
   margin: 10px auto;
@@ -14,16 +15,16 @@
   width: 120px;
 }
 .buttons {
-  box-sizing: border-box;
   margin: 5px;
   padding: 5px;
 }
-.first-row, .second-row, .third-row, .fourth-row{
+.buttons div {
   display: flex;
   justify-content:space-between;
 }
 button {
   box-sizing: border-box;
+  cursor: pointer;
   font-size: 20px;
   height: 55px;
   margin: 3px;
@@ -38,7 +39,6 @@ button {
 .display {
   background-color: #FFFFFF ;
   border: 1px solid #BBBBBB ;
-  box-sizing: border-box;
   padding: 5px;
   text-align: end;
   margin:14px;
