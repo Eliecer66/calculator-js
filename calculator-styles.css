@@ -2,122 +2,57 @@
   font-family: sans-serif;
 }
 .calculator {
-  border-color: transparent;
-  border-style: solid;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  justify-content: center;
-  padding: 10px;
+  border: 2px solid;
+  border-radius: 10px;
+  background-color: #000000 ;
+  margin: 10px auto;
+  padding: 5px;
+  width: 300px;
+}
+.title {
+  margin: 20px auto;
+  width: 120px;
 }
 .buttons {
-  align-self: center;
-  border-color: transparent;
-  border-style: solid;
   box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  height: 250px;
-  justify-content: center;
   margin: 5px;
   padding: 5px;
-  width: 580px;
 }
-.numbers {
-  border-color: transparent;
-  border-style: solid;
-  box-sizing: border-box;
+.first-row, .second-row, .third-row, .fourth-row{
   display: flex;
-  flex-wrap: wrap;
-  height: 80%;
-  justify-content: space-evenly;
-  margin: 1px;
-  padding: 1px;
-  width:50%;
+  justify-content:space-between;
 }
-.actions {
-  border-color:transparent;
-  border-style: solid;
+button {
   box-sizing: border-box;
-  display:flex;
-  height: 21%;
-  justify-content: space-around;
-  margin: 1px 1px 0px 1px;
-  padding: 1px;
-  width: 64%;
+  font-size: 20px;
+  height: 55px;
+  margin: 3px;
+  width: 100%;
 }
-.operators {
-  border-color:transparent;
-  border-style: solid;
-  box-sizing: border-box;
+.fifth-row {
   display: flex;
-  flex-wrap: wrap;
-  height: 80%;
-  justify-content: space-evenly;
-  margin: 1px;
-  padding: 1px;
-  width: 15%;
-}
-.numbers button {
-  font-size: large;
-  height: 20%;
-  margin: 2px;
-  padding: 1px;
-  width: 30%;
 }
 #number-0 {
-  width: 60%;
-  margin-right: 0px;
-}
-.actions button {
-  font-size: large;
-  height: 90%;
-  margin: 2px;
-  padding: 1px;
-  width: 33%;
-}
-.operators button {
-  font-size: large;
-  height: 20%;
-  margin: 2px;
-  padding: 1px;
-  width: 90%;
+  flex-shrink: 0.68;
 }
 .display {
-  align-self: center;
-  border-color: silver;
-  border-style:inset;
+  background-color: #FFFFFF ;
+  border: 1px solid #BBBBBB ;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  height: 120px;
   padding: 5px;
   text-align: end;
-  width: 26%;
-  font-size: 1.2rem;
-  border-width:thin;
+  margin:14px;
 }
-#result {
-  background-color: #85C1E9;
+.first-row button{
+  background-color: #E67E22;
   border-width: thin;
-  color: white;
-}
-#erase {
-  background-color: #85C1E9;
-  border-width: thin;
-  color: white;
-}
-#clear {
-  background-color: #85C1E9;
-  border-width: thin;
-  color: white;
+  color: #FFFFFF ;
 }
 .display h2 {
+  color:#000000;
   margin: 0px 5px;
-  color:black
 }
 .display p {
+  color: #7F8C8D;
   margin: 20px 5px;
-  color: gray;
 }

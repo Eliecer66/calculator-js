@@ -2,14 +2,14 @@ const PLUS = '+';
 const SUBTRACT = '-';
 const MULTIPLY = '*';
 const DIVIDE = '/';
-const DELETE = "⌂";
+const DELETE = 'x';
 const EQUAL = '=';
-const DISPLAY_ZERO = `0`;
+const DISPLAY_ZERO = '0';
 const BASE = 10;
 const CLEAR =  'C'
-const NUMBERS = document.querySelectorAll(".numbers");
-const ACTIONS = document.querySelectorAll(".actions");
-const OPERATORS = document.querySelectorAll(".operators");
+const numbers = document.querySelectorAll(".numbers");
+const actions = document.querySelectorAll(".actions");
+const operators = document.querySelectorAll(".operators");
 /* How the calculator works.
  * 1. When a number is joined, it saved into a string called term.
  * 2. Only we can delete a number if is in the join face. 
@@ -27,11 +27,12 @@ const calculator = {
 }; 
 /*
  *PRE-CONDITIONS: It needed two terms.
- *POST-CONDITIONS:This function return the final result. 
+ *POST-CONDITIONS:This function return the final result.
+ *NOTE: In the subtract's case is necessary the "if" because otherwise, the subtract can't be possible.  
  */
 function calculation(firstTerm, secondTerm) {
   let one = parseInt(firstTerm, BASE);
-  let two = parseInt(secondTerm, BASE);
+  const two = parseInt(secondTerm, BASE);
   let final = 0;
   if (calculator.operator === PLUS) {
     final = one + two;
@@ -52,6 +53,8 @@ function calculation(firstTerm, secondTerm) {
   if (calculator.operator === DIVIDE) {
     if (one === 0) {
       final = two; 
+    }else if (two === 0) {
+      final = 0;
     }else {
       final = one / two;
     }
@@ -63,14 +66,11 @@ function calculation(firstTerm, secondTerm) {
  *POST-CONDITIONS: It Saves the numbers when are clicked.
  */
 const saveNumber = function(event) {  
-  let character = event.target.value;
+  const character = event.target.value;
   calculator.term += character;
   calculator.current += character;
   livesResult.innerHTML = calculator.current;
 }
-NUMBERS.forEach(function(input) {
-  input.addEventListener("click", saveNumber)
-});
 /*
  *PRE-CONDITIONS: This function gets information from global variables filled previously.
  *POST-CONDITIONS: It Calculates a number.
@@ -95,11 +95,13 @@ const operate = function (event) {
  *POST-CONDITIONS: It does three actions when it activates by event listener. 
  */
 const doActions = function (event) {
-  let character = event.target.value; 
+  const character = event.target.value; 
   if(character === EQUAL) {
     calculator.total = calculation(calculator.total, calculator.current);
     livesResult.innerHTML = calculator.total;
-    display.innerHTML = "";   
+    display.innerHTML = "0";   
+    calculator.current = calculator.total;
+    calculator.total = 0;
   }
   if (character === CLEAR) {
     calculator.current = "";
@@ -111,18 +113,24 @@ const doActions = function (event) {
     livesResult.innerHTML = 0;
   }
   if (character === DELETE) {
-    let firstTerm = calculator.term; 
-    let number = calculator.current;
-    let box = number.slice(0,-1); 
-    let boxOne = firstTerm.slice(0,-1);
+    const firstTerm = calculator.term; 
+    const number = calculator.current;
+    const box = number.slice(0,-1); 
+    const boxOne = firstTerm.slice(0,-1);
     calculator.term = boxOne; 
     calculator.current = box;
     livesResult.innerHTML = calculator.current;
+    if(calculator.current.length === 0) {
+      livesResult.innerHTML = 0;
+    }
   }
 };
-OPERATORS.forEach(function(operators) {
+numbers.forEach(function(input) {
+  input.addEventListener("click", saveNumber)
+});
+operators.forEach(function(operators) {
   operators.addEventListener("click", operate)
 });
-ACTIONS.forEach(function(actions) {
+actions.forEach(function(actions) {
   actions.addEventListener("click", doActions)
 });

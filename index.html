@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="StyleSheet" href="calculator-styles.css" type="text/css">
+    <link rel="Stylesheet" href="calculator-styles.css" type="text/css">
     <title>Calculator</title>
   </head>
   <!-- Structure change. 
@@ -10,35 +10,40 @@
     * Add CSS file.
   -->
   <body>  
+    <h2 class="title">Calculator</h2>
     <div class="calculator">
       <div class="display">
         <p class="counts">0</p>
         <h2 class="lives-result">0</h2>
       </div>
       <div class="buttons">
-        <div class="actions">
-          <button id="erase" value="⌂">«</button>
-          <button id="clear" value="C">C</button>
-          <button id="result" value = "=">=</button>
+        <div class="first-row">
+          <button class= "actions" id="erase" value="x">«</button>
+          <button class= "actions" id="clear" value="C">C</button>
+          <button class= "actions" id="result" value ="=">=</button>
         </div>
-        <div class="numbers">
-          <button id="number-7" value="7">7</button>
-          <button id="number-8" value="8">8</button>
-          <button id="number-9" value="9">9</button><br>
-          <button id="number-4" value="4">4</button>
-          <button id="number-5" value="5">5</button>
-          <button id="number-6" value="6">6</button><br>
-          <button id="number-1" value="1">1</button>
-          <button id="number-2" value="2">2</button>
-          <button id="number-3" value="3">3</button><br>
-          <button id="number-0" value="0">0</button>
-          <button id="number-comma" value=".">.</button>
+        <div class="second-row">
+          <button class="numbers" id="number-7" value="7">7</button>
+          <button class="numbers" id="number-8" value="8">8</button>
+          <button class="numbers" id="number-9" value="9">9</button>
+          <button class="operators" id="operator-divide" value ="/">÷</button>
         </div>
-        <div class="operators">
-          <button id="operator-divide" value = "/">÷</button>
-          <button id="operator-multiply" value = "*">x</button>
-          <button id="operator-subtract" value="-">-</button>
-          <button id="operator-add" value="+">+</button>
+        <div class="third-row">
+          <button class="numbers" id="number-4" value="4">4</button>
+          <button class="numbers" id="number-5" value="5">5</button>
+          <button class="numbers" id="number-6" value="6">6</button>
+          <button class="operators" id="operator-multiply" value="*">x</button>
+        </div>
+        <div class="fourth-row">
+          <button class="numbers" id="number-1" value="1">1</button>
+          <button class="numbers" id="number-2" value="2">2</button>
+          <button class="numbers" id="number-3" value="3">3</button>
+          <button class="operators" id="operator-subtract" value="-">-</button>
+        </div>
+        <div class="fifth-row">
+          <button class="numbers" id="number-0" value="0">0</button>
+          <button class="numbers" id="number-comma" value=".">.</button>
+          <button class="operators" id="operator-add" value="+">+</button>
         </div>
     </div>
     </div>
