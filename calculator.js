@@ -30,32 +30,26 @@ const calculator = {
  *POST-CONDITIONS:This function return the final result.
  *NOTE: In the subtract's case is necessary the "if" because otherwise, the subtract can't be possible.  
  */
-function calculation(firstTerm, secondTerm) {
-  let one = parseInt(firstTerm, BASE);
-  const two = parseInt(secondTerm, BASE);
+function calculation(current, total) {
+  const one = parseInt(current, BASE);
+  const two = parseInt(total, BASE);
   let final = 0;
+  if (!total) {
+    return current;
+  }
   if (calculator.operator === PLUS) {
     final = one + two;
   } 
   if (calculator.operator === SUBTRACT) {
-    if (one === 0) {
-      final = two;   
-    }else {
-      final = one - two;
-    }
+    final = one - two;
   }
   if (calculator.operator === MULTIPLY) {
-    if (one === 0) {
-      one = 1;
-    }    
     final = one * two;
   }
   if (calculator.operator === DIVIDE) {
-    if (one === 0) {
-      final = two; 
-    }else if (two === 0) {
-      final = 0;
-    }else {
+    if (two === 0) {
+      final = "FATAL ERROR";
+    } else {
       final = one / two;
     }
   }
@@ -72,23 +66,40 @@ const saveNumber = function(event) {
   livesResult.innerHTML = calculator.current;
 }
 /*
+ *PRE-CONDITIONS: This function receive two variables that are going to be used to change two global variables.
+ *POST-CONDITIONS: Change the state of the display.
+ */
+function showDisplay(stringOperations, total) {
+  display.innerHTML = stringOperations;
+  livesResult.innerHTML = total;
+}
+/*
+ *PRE-CONDITIONS: Receive one variable.
+ *POST-CONDITIONS: Change the state of two variables.
+ */
+function reassignedVariables(operator) {
+  calculator.current = "";
+  calculator.operator = operator;
+}
+/*
  *PRE-CONDITIONS: This function gets information from global variables filled previously.
  *POST-CONDITIONS: It Calculates a number.
  */
 const operate = function (event) {
-  if (calculator.operator === "") {
+  if (!calculator.operator) {
     calculator.operator = event.target.value;
     calculator.nextOperator = calculator.operator;
     calculator.term += calculator.operator;
-  }else {
+    calculator.total = calculator.current;
+    reassignedVariables(calculator.nextOperator);
+    showDisplay(calculator.term, calculator.total);
+  } else {
     calculator.nextOperator = event.target.value;
     calculator.term += calculator.nextOperator;
+    calculator.total = calculation(calculator.total, calculator.current);
+    reassignedVariables(calculator.nextOperator);
+    showDisplay(calculator.term, calculator.total);
   }
-  calculator.total = calculation(calculator.total, calculator.current);
-  calculator.current = "";
-  calculator.operator = calculator.nextOperator;
-  display.innerHTML = calculator.term;
-  livesResult.innerHTML = calculator.total;
 };
 /*
  *PRE-CONDITIONS: This function gets information from global variables filled previously.
@@ -100,8 +111,7 @@ const doActions = function (event) {
     calculator.total = calculation(calculator.total, calculator.current);
     livesResult.innerHTML = calculator.total;
     display.innerHTML = "0";   
-    calculator.current = calculator.total;
-    calculator.total = 0;
+    calculator.current = 0;
   }
   if (character === CLEAR) {
     calculator.current = "";
