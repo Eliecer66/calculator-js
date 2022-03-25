@@ -30,9 +30,9 @@ const calculator = {
  *POST-CONDITIONS:This function return the final result.
  *NOTE: In the subtract's case is necessary the "if" because otherwise, the subtract can't be possible.  
  */
-function calculation(current, total) {
-  const one = parseInt(current, BASE);
-  const two = parseInt(total, BASE);
+function calculation(total, current) {
+  const one = parseInt(total, BASE);
+  const two = parseInt(current, BASE);
   let final = 0;
   if (!total) {
     return current;
@@ -86,15 +86,16 @@ function reassignedVariables(operator) {
  *POST-CONDITIONS: It Calculates a number.
  */
 const operate = function (event) {
+  const value = event.target.value;
   if (!calculator.operator) {
-    calculator.operator = event.target.value;
+    calculator.operator = value;
     calculator.nextOperator = calculator.operator;
     calculator.term += calculator.operator;
     calculator.total = calculator.current;
     reassignedVariables(calculator.nextOperator);
     showDisplay(calculator.term, calculator.total);
   } else {
-    calculator.nextOperator = event.target.value;
+    calculator.nextOperator = value;
     calculator.term += calculator.nextOperator;
     calculator.total = calculation(calculator.total, calculator.current);
     reassignedVariables(calculator.nextOperator);
@@ -123,13 +124,12 @@ const doActions = function (event) {
     livesResult.innerHTML = 0;
   }
   if (character === DELETE) {
-    const firstTerm = calculator.term; 
+    const firstTerm = calculator.term;
     const number = calculator.current;
-    const box = number.slice(0,-1); 
-    const boxOne = firstTerm.slice(0,-1);
-    calculator.term = boxOne; 
-    calculator.current = box;
+    calculator.term = firstTerm.slice(0,-1);
+    calculator.current = number.slice(0,-1);
     livesResult.innerHTML = calculator.current;
+
     if(calculator.current.length === 0) {
       livesResult.innerHTML = 0;
     }
