@@ -1,73 +1,146 @@
 const PLUS = '+'; 
 const SUBTRACT = '-';
-const DELETE = "delete";
+const MULTIPLY = '*';
+const DIVIDE = '/';
+const DELETE = 'x';
 const EQUAL = '=';
-const DISPLAYzERO = `0`;
-const EMPTYsTRING = "";
-const EMPTYcHARACTER = '';
+const DISPLAY_ZERO = '0';
 const BASE = 10;
-const OUTCOME = document.querySelectorAll("input");
-/*
- * I don´t know if the behavior of this object is like a struct:
- * Questions: 
- *  It has to be declared first as variable before use it or not?
- *  Also I dont't know if I can set the variables that are on it.
- *  Because of it's working, I'm not sure.
+const CLEAR =  'C'
+const numbers = document.querySelectorAll(".numbers");
+const actions = document.querySelectorAll(".actions");
+const operators = document.querySelectorAll(".operators");
+/* How the calculator works.
+ * 1. When a number is joined, it saved into a string called term.
+ * 2. Only we can delete a number if is in the join face. 
+ * 3. The string shows how is going older terms. 
+ * 4. The operators are limited by the current number that the user wants to join 
  */
-let count = {
-  term: EMPTYsTRING,
-  firstTerm: EMPTYsTRING,
-  secondTerm: EMPTYsTRING,
-  operator: EMPTYsTRING,
-  total: EMPTYsTRING,
-  display: document.querySelector(".display")
+let display = document.querySelector(".counts");
+let livesResult = document.querySelector(".lives-result");
+const calculator = {
+  term: "",
+  current: "",
+  operator: "",
+  nextOperator: "",
+  total: 0,
 }; 
 /*
- *PRE: It took globals variables from the general scope. Theses variables has to be charged previously.
- *POST: It calculates the operation between two integers.
- *NOTE: I have to improve this function, It has to be able to calculate more operations. 
+ *PRE-CONDITIONS: It needed two terms.
+ *POST-CONDITIONS:This function return the final result.
+ *NOTE: In the subtract's case is necessary the "if" because otherwise, the subtract can't be possible.  
  */
-function calculation() {
-  let one = parseInt(count.firstTerm, BASE);
-  let two = parseInt(count.secondTerm, BASE);
+function calculation(total, current) {
+  const one = parseInt(total, BASE);
+  const two = parseInt(current, BASE);
   let final = 0;
-  if (count.operator === PLUS) {
-      final = one + two;
-  } else if (count.operator === SUBTRACT) {
-      final = one - two;
+  if (!total) {
+    return current;
+  }
+  if (calculator.operator === PLUS) {
+    final = one + two;
+  } 
+  if (calculator.operator === SUBTRACT) {
+    final = one - two;
+  }
+  if (calculator.operator === MULTIPLY) {
+    final = one * two;
+  }
+  if (calculator.operator === DIVIDE) {
+    if (two === 0) {
+      final = "FATAL ERROR";
+    } else {
+      final = one / two;
+    }
   }
   return final;
 }
 /*
- *PRE: This function is activated if the eventListener is true.
- *POST: Store the elements selected in the calculator by the user.
- *NOTE: This function has to be modularized and scalable, so it has to improve.
+ *PRE-CONDITIONS: This function get information from a event listener.
+ *POST-CONDITIONS: It Saves the numbers when are clicked.
  */
-const SAVEcHARACTER = function(event) {  
-  let character = event.target.value;
-  if (character != SUBTRACT && character != PLUS && character != EQUAL && character != DELETE) {
-      count.term += event.target.value;
-      count.display.innerHTML = `${count.term}`;
-  } else if (character === SUBTRACT || character === PLUS) {
-      count.operator = character;
-      count.firstTerm =  count.term;
-      count.term = EMPTYcHARACTER;
-      count.display.innerHTML = DISPLAYzERO;
-  } else if (character === EQUAL) {
-      count.secondTerm = count.term;
-      final = calculation();
-      count.display.innerHTML = `${final}`;
-  } else if (character == DELETE) {
-      count.firstTerm = EMPTYsTRING;
-      count.secondTerm = EMPTYsTRING;
-      count.term = EMPTYsTRING;
-      count.display.innerHTML = DISPLAYzERO;
-  }
+const saveNumber = function(event) {  
+  const character = event.target.value;
+  calculator.term += character;
+  calculator.current += character;
+  livesResult.innerHTML = calculator.current;
 }
 /*
- *PRE: It took a bunch of elements from the DOM in this case inputs, to add a event listener to them. Because it is a calculator. 
- *POST: If de event is true, It executes process to get a solution.   
+ *PRE-CONDITIONS: This function receive two variables that are going to be used to change two global variables.
+ *POST-CONDITIONS: Change the state of the display.
  */
-OUTCOME.forEach(function(input){
-  input.addEventListener("click", SAVEcHARACTER)
+function showDisplay(stringOperations, total) {
+  display.innerHTML = stringOperations;
+  livesResult.innerHTML = total;
+}
+/*
+ *PRE-CONDITIONS: Receive one variable.
+ *POST-CONDITIONS: Change the state of two variables.
+ */
+function reassignedVariables(operator) {
+  calculator.current = "";
+  calculator.operator = operator;
+}
+/*
+ *PRE-CONDITIONS: This function gets information from global variables filled previously.
+ *POST-CONDITIONS: It Calculates a number.
+ */
+const operate = function (event) {
+  const value = event.target.value;
+  if (!calculator.operator) {
+    calculator.operator = value;
+    calculator.nextOperator = calculator.operator;
+    calculator.term += calculator.operator;
+    calculator.total = calculator.current;
+    reassignedVariables(calculator.nextOperator);
+    showDisplay(calculator.term, calculator.total);
+  } else {
+    calculator.nextOperator = value;
+    calculator.term += calculator.nextOperator;
+    calculator.total = calculation(calculator.total, calculator.current);
+    reassignedVariables(calculator.nextOperator);
+    showDisplay(calculator.term, calculator.total);
+  }
+};
+/*
+ *PRE-CONDITIONS: This function gets information from global variables filled previously.
+ *POST-CONDITIONS: It does three actions when it activates by event listener. 
+ */
+const doActions = function (event) {
+  const character = event.target.value; 
+  if(character === EQUAL) {
+    calculator.total = calculation(calculator.total, calculator.current);
+    livesResult.innerHTML = calculator.total;
+    display.innerHTML = "0";   
+    calculator.current = 0;
+  }
+  if (character === CLEAR) {
+    calculator.current = "";
+    calculator.operator = "";
+    calculator.nextOperator = "";
+    calculator.term = "";
+    calculator.total = 0;
+    display.innerHTML = 0;
+    livesResult.innerHTML = 0;
+  }
+  if (character === DELETE) {
+    const firstTerm = calculator.term;
+    const number = calculator.current;
+    calculator.term = firstTerm.slice(0,-1);
+    calculator.current = number.slice(0,-1);
+    livesResult.innerHTML = calculator.current;
+
+    if(calculator.current.length === 0) {
+      livesResult.innerHTML = 0;
+    }
+  }
+};
+numbers.forEach(function(input) {
+  input.addEventListener("click", saveNumber)
+});
+operators.forEach(function(operators) {
+  operators.addEventListener("click", operate)
+});
+actions.forEach(function(actions) {
+  actions.addEventListener("click", doActions)
 });

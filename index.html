@@ -2,26 +2,50 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <link rel="Stylesheet" href="calculator-styles.css" type="text/css">
     <title>Calculator</title>
   </head>
-  <body>
-    <h1>Calculator</h1>
+  <!-- Structure change. 
+    * Buttons instead inputs.
+    * Add CSS file.
+  -->
+  <body>  
+    <h2 class="title">Calculator</h2>
     <div class="calculator">
-      <h2 class="display">0</h2>
-      <input type="button" value="1" id="button_1">
-      <input type="button" value="2" id="button_2">
-      <input type="button" value="3" id="button_3">
-      <input type="button" value="+" id="button_add"><br>
-      <input type="button" value="4" id="button_4">
-      <input type="button" value="5" id="button_5">
-      <input type="button" value="6" id="button_6">
-      <input type="button" value="-" id="button_subtract"><br>
-      <input type="button" value="7" id="button_7">
-      <input type="button" value="8" id="button_8">
-      <input type="button" value="9" id="button_9">
-      <input type="button" value="0" id="button_0"><br>
-      <input type="button" value="delete" id ="button-reset">
-      <input type="button" value = "=" id = button-equal>
+      <div class="display">
+        <p class="counts">0</p>
+        <h2 class="lives-result">0</h2>
+      </div>
+      <div class="buttons">
+        <div class="button-row first-row">
+          <button class="actions" id="erase" value="x">«</button>
+          <button class="actions" id="clear" value="C">C</button>
+          <button class="actions" id="result" value ="=">=</button>
+        </div>
+        <div class="button-row second-row">
+          <button class="numbers" id="number-7" value="7">7</button>
+          <button class="numbers" id="number-8" value="8">8</button>
+          <button class="numbers" id="number-9" value="9">9</button>
+          <button class="operators" id="operator-divide" value ="/">÷</button>
+        </div>
+        <div class="button-row third-row">
+          <button class="numbers" id="number-4" value="4">4</button>
+          <button class="numbers" id="number-5" value="5">5</button>
+          <button class="numbers" id="number-6" value="6">6</button>
+          <button class="operators" id="operator-multiply" value="*">x</button>
+        </div>
+        <div class="button-row fourth-row">
+          <button class="numbers" id="number-1" value="1">1</button>
+          <button class="numbers" id="number-2" value="2">2</button>
+          <button class="numbers" id="number-3" value="3">3</button>
+          <button class="operators" id="operator-subtract" value="-">-</button>
+        </div>
+        <div class="button-row fifth-row">
+          <button class="numbers" id="number-0" value="0">0</button>
+          <button class="numbers" id="number-comma" value=".">.</button>
+          <button class="operators" id="operator-add" value="+">+</button>
+        </div>
+    </div>
     </div>
     <script src="calculator.js"></script>
   </body>
