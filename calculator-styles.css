@@ -35,9 +35,10 @@ button {
 .display {
   background-color: #FFFFFF ;
   border: 1px solid #BBBBBB ;
-  padding: 5px;
+  padding: 6px;
   text-align: end;
-  margin:14px;
+  margin:17px;
+  overflow-x:auto;
 }
 .first-row button{
   background-color: #E67E22;
@@ -49,6 +50,10 @@ button {
   margin: 0px 5px;
 }
 .display p {
-  color: #7F8C8D;
+  font-size: 20px;
+  color: #163333;
+  border: 1px;
+  height: 20px;
+  box-sizing: border-box;
   margin: 20px 5px;
 }
