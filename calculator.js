@@ -1,33 +1,33 @@
-const PLUS      = '+'; 
-const SUBTRACT  = '-';
-const MULTIPLY  = '*';
-const DIVIDE    = '/';
-const DELETE    = 'e';
-const EQUAL     = '=';
-const EMPTY     = '0';
-const BASE      = 10;
-const CLEAR     =  'c'
-const numbers   = document.querySelectorAll(".numbers");
-const actions   = document.querySelectorAll(".actions");
-const equal     = document.querySelector("#equal");
+const PLUS = '+'; 
+const SUBTRACT = '-';
+const MULTIPLY = '*';
+const DIVIDE = '/';
+const DELETE = 'e';
+const EQUAL = '=';
+const BASE = 10;
+const CLEAR =  'c'
+const DISPLAY_LENGTH = 17;
+const numbers = document.querySelectorAll(".numbers");
+const actions = document.querySelectorAll(".actions");
+const equal = document.querySelector("#equal");
 const operators = document.querySelectorAll(".operators");
-let display     = document.querySelector(".counts");
+let display = document.querySelector(".counts");
 let livesResult = document.querySelector(".lives-result");
-const sign      = [PLUS, SUBTRACT, MULTIPLY, DIVIDE];
+const signs = [PLUS, SUBTRACT, MULTIPLY, DIVIDE];
 
-//Global variables
+// Global variables
 const calculator = {
   container:[],
   term: '',
   current: ''
 };
-
 /*
  *PRE-CONDITIONS: This function gets information from a event listener.
  *POST-CONDITIONS: It saves the numbers when are clicked.
  */
 const saveNumber = function(event, element) {
-  if (calculator.term.length < 17) {
+  // This condition is a limit, therefore the screen cannot overflow.
+  if (calculator.term.length < DISPLAY_LENGTH) {
     let character       =  element || event.target.value;
     calculator.term    += character;
     calculator.current += character;
@@ -91,7 +91,7 @@ function solution(first, second, operator) {
 
   const a = parseInt(first, BASE);
   const b = parseInt(second, BASE);
-  var total;
+  let total;
 
   switch (operator) {
     case PLUS:
@@ -119,10 +119,9 @@ function solution(first, second, operator) {
  in order.
  */
 const resolution = function() {
-  var first, second, operator, total;
-  var i = 0;
+  let first, second, operator, total;
+  let i = 0;
   calculator.container.push(calculator.current);
-  console.log(calculator.container);
 
   for (i ; i < calculator.container.length; i++) {
     if (i === 0) {
@@ -139,12 +138,7 @@ const resolution = function() {
       second   = calculator.container[i];
       total    = solution(first,second, operator);
     }
-    console.log(first);
-    console.log(operator);
-    console.log(second);
   }
-  console.log(total);
-  console.log("------------");
   calculator.term            += calculator.current;
   livesResult.innerHTML       = total;
   display.innerHTML = ' ';
@@ -171,22 +165,22 @@ document.addEventListener('keydown', function (event) {
   let keyName = event.key;
 
   if (!isNaN(keyName)) {
-    saveNumber(EMPTY, keyName);
+    saveNumber(event, keyName);
   }
   if (keyName === 'Backspace') {
     event.preventDefault();
     keyName = DELETE;
-    wipeAction(EMPTY,keyName);
+    wipeAction(event,keyName);
   }
   if (keyName === CLEAR) {
-    wipeAction(EMPTY,keyName);
+    wipeAction(event,keyName);
   }
   if (keyName === 'Enter' || keyName === EQUAL) {
     resolution();
   }
-  sign.forEach(element => {
+  signs.forEach(element => {
     if (keyName === element) {
-      operate(EMPTY, keyName);
+      operate(event, keyName);
    }
  });
 });
