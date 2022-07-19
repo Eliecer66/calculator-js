@@ -22,8 +22,8 @@ const calculator = {
   current: ''
 };
 /*
- *PRE-CONDITIONS: This function gets information from a event listener.
- *POST-CONDITIONS: It saves the numbers when are clicked.
+ * PRE-CONDITIONS: This function gets information from a event listener.
+ * POST-CONDITIONS: It saves the numbers when are clicked.
  */
 const saveNumber = function(event, element) {
   // This condition is a limit, therefore the screen cannot overflow.
@@ -37,8 +37,8 @@ const saveNumber = function(event, element) {
 }
 
 /*
- *PRE-CONDITIONS: This function gets information from global variables filled previously.
- *POST-CONDITIONS: It Calculates a number.
+ * PRE-CONDITIONS: This function gets information from global variables filled previously.
+ * POST-CONDITIONS: It Calculates a number.
  */
 const operate = function(event, element) {
 
@@ -54,8 +54,8 @@ const operate = function(event, element) {
 };
 
 /*
- *PRE-CONDITIONS: This function gets information from global variables filled previously.
- *POST-CONDITIONS: It does three actions when it activates by event listener. 
+ * PRE-CONDITIONS: This function gets information from global variables filled previously.
+ * POST-CONDITIONS: It does three actions when it activates by event listener. 
  */
 const wipeAction = function (event,element) {
 
@@ -84,8 +84,8 @@ const wipeAction = function (event,element) {
 };
 
 /*
- *PRE-CONDITIONS: It needed two terms.
- *POST-CONDITIONS:This function return the final result.
+ * PRE-CONDITIONS: It needed two terms.
+ * POST-CONDITIONS:This function return the final result.
  */
 function solution(first, second, operator) {
 
@@ -114,9 +114,9 @@ function solution(first, second, operator) {
   return total || first;
 }
 
-/*PRE-CONDITIONS:
- *POST-CONDITIONS: It Takes the elements from the global varables and solves the operations
- in order.
+/* PRE-CONDITIONS:
+ * POST-CONDITIONS: It Takes the elements from the global varables and solves the operations
+   in order.
  */
 const resolution = function() {
   let first, second, operator, total;
