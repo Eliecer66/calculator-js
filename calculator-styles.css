@@ -2,26 +2,31 @@
   font-family: sans-serif;
   box-sizing: border-box;
 }
+
 .calculator {
-  border: 2px solid violet;
+  border: 2px solid #1f1d1d;
   border-radius: 10px;
-  background-color: violet ;
+  background-color: #1a1617 ;
   margin: 10px auto;
   padding: 5px;
   width: 300px;
 }
+
 .title {
   margin: 20px auto;
   width: 120px;
 }
+
 .buttons {
   margin: 5px;
   padding: 5px;
 }
+
 .button-row {
   display: flex;
   justify-content: space-between;
 }
+
 button {
   cursor: pointer;
   font-size: 20px;
@@ -29,9 +34,11 @@ button {
   margin: 3px;
   width: 100%;
 }
+
 #number-0 {
   flex-shrink: 0.68;
 }
+
 .display {
   background-color: #FFFFFF ;
   border: 1px solid #BBBBBB ;
@@ -40,19 +47,91 @@ button {
   margin:17px;
   overflow-x:auto;
 }
+
 .first-row button{
-  background-color: gray;
+  background-color: #FF001B;
   border-width: thin;
   color: #FFFFFF ;
 }
+
 .display h2 {
   color:#000000;
   margin: 0px 5px;
 }
+
 .display p {
   font-size: 20px;
   color: #163333;
   border: 1px;
   height: 20px;
   margin: 20px 5px;
+}
+
+/* Media queries */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+
+  body {
+    background-color: black;
+    margin: 0;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .calculator {
+    width: auto;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  .display {
+    height: 23vh;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #000000;
+    border-color: #000000;
+    justify-content: space-between;
+    border-radius: 70px;
+    margin-top: 60px;
+  }
+
+  button {
+    cursor: pointer;
+    font-size: 5em;
+    height: 11.5vh;
+    margin: 14px 6px;
+    border-radius: 50%;
+    border-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+
+  .clean, #number-0 {
+    flex-shrink: 0.8;
+    border-radius: 100px;
+    justify-content: start;
+    padding-left: 80px;
+  }
+  .buttons {
+    margin: 80px 10px;
+  }
+  
+  .display p, .display h2 {
+    color: #FFFFFF;
+    font-size: 10em;
+  }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  body {
+    background-color: teal;
+  }
 }
