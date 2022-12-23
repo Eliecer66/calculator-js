@@ -44,7 +44,7 @@ button {
   border: 1px solid #BBBBBB ;
   padding: 6px;
   text-align: end;
-  margin:17px;
+  margin: 17px;
   overflow-x:auto;
 }
 
@@ -88,29 +88,30 @@ button {
   }
 
   .display {
-    height: 23vh;
-    padding-top: 30px;
+    height: 25vh;
+    padding: 3px 45px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 3px;
     background-color: #000000;
     border-color: #000000;
     justify-content: space-between;
     border-radius: 70px;
-    margin-top: 60px;
+    margin-top: 20px;
   }
 
   button {
     cursor: pointer;
     font-size: 5em;
-    height: 11.5vh;
+    height: 11vh;
     margin: 14px 6px;
     border-radius: 50%;
     border-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
-  
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .clean, #number-0 {
@@ -120,12 +121,17 @@ button {
     padding-left: 80px;
   }
   .buttons {
-    margin: 80px 10px;
+    margin: 45px 10px;
   }
+
+  .counts {
+    font-weight: lighter;
+  } 
   
   .display p, .display h2 {
     color: #FFFFFF;
-    font-size: 10em;
+    font-size: 9em;
+    height: auto;
   }
 }
 
