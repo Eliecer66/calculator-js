@@ -6,7 +6,9 @@ const DELETE = 'e';
 const EQUAL = '=';
 const BASE = 10;
 const CLEAR =  'c'
-const DISPLAY_LENGTH = 17;
+const DIVIDE_SING = '÷';
+const MULTIPLY_SING = 'x';
+const DISPLAY_LENGTH = 9;
 const numbers = document.querySelectorAll(".numbers");
 const actions = document.querySelectorAll(".actions");
 const equal = document.querySelector("#equal");
@@ -36,18 +38,27 @@ const saveNumber = function(event, element) {
   }
 }
 
+function parseSign(value) {
+  if (value === DIVIDE) {
+    return DIVIDE_SING;
+  }
+
+  if (value === MULTIPLY) {
+    return MULTIPLY_SING; 
+  }
+}
+
 /*
  * PRE-CONDITIONS: This function gets information from global variables filled previously.
  * POST-CONDITIONS: It Calculates a number.
  */
 const operate = function(event, element) {
-
   let top     = calculator.container.length;
   const value = element || event.target.value;
-  
   calculator.container[top]     = calculator.current;
   calculator.container[top + 1] = value;
-  calculator.term              += value;
+  
+  calculator.term              += parseSign(value);
   calculator.current            = '';
   calculator.operator           = '';
   display.innerHTML             = calculator.term;
@@ -147,19 +158,36 @@ const resolution = function() {
   calculator.current          = total;
 }
 
-numbers.forEach(function (input) {
-  input.addEventListener("click", saveNumber)
-});
+if (window.matchMedia("(max-width: 400px)").matches) {
 
-operators.forEach(function (operators) {
-  operators.addEventListener("click", operate)
-});
-
-actions.forEach(function (actions) {
-  actions.addEventListener("click", wipeAction)
-});
-
-equal.addEventListener('click', resolution);
+  numbers.forEach(function (input) {
+    input.addEventListener("touchstart", saveNumber)
+  });
+  
+  operators.forEach(function (operators) {
+    operators.addEventListener("touchstart", operate)
+  });
+  
+  actions.forEach(function (actions) {
+    actions.addEventListener("touchstart", wipeAction)
+  });
+  
+  equal.addEventListener('touchstart', resolution);
+} else {
+  numbers.forEach(function (input) {
+    input.addEventListener("click", saveNumber)
+  });
+  
+  operators.forEach(function (operators) {
+    operators.addEventListener("click", operate)
+  });
+  
+  actions.forEach(function (actions) {
+    actions.addEventListener("click", wipeAction)
+  });
+  
+  equal.addEventListener('click', resolution);
+}
 
 document.addEventListener('keydown', function (event) {
   let keyName = event.key;
@@ -182,5 +210,5 @@ document.addEventListener('keydown', function (event) {
     if (keyName === element) {
       operate(event, keyName);
    }
- });
+  });
 });
